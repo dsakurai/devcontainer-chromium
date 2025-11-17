@@ -1,0 +1,12 @@
+{
+	"name": "Debian Slim Devcontainer",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+	"runArgs": [
+		// For sandboxing in web browsers
+		"--cap-add=SYS_ADMIN",
+		"--security-opt=seccomp=unconfined"
+	],
+	"remoteUser": "vscode"
+}
