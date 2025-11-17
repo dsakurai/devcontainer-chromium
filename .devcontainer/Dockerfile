@@ -7,7 +7,10 @@ ARG USER_GID=${USER_UID}
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	sudo chromium fonts-noto-cjk git ssh neovim \
+	# Chromium
+	chromium fonts-noto-cjk \
+	# Development
+	sudo ca-certificates curl python3 git ssh neovim \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid ${USER_GID} ${USERNAME} \
@@ -19,3 +22,8 @@ RUN mkdir -p /workspaces && chown ${USERNAME}:${USER_GID} /workspaces
 WORKDIR /workspaces
 
 USER ${USERNAME}
+
+ENV PATH="/home/${USERNAME}/.local/bin:${PATH}"
+
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+# RUN uv python install 3.13
