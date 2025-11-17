@@ -7,7 +7,7 @@ ARG USER_GID=${USER_UID}
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	sudo chromium fonts-noto-cjk \
+	sudo chromium fonts-noto-cjk git ssh \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN groupadd --gid ${USER_GID} ${USERNAME} \
